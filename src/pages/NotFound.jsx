@@ -1,5 +1,10 @@
+import Nav from "../components/Nav";
+
 export default function NotFound() {
   return (
-    <div>NotFound</div>
+    <div>
+        <Nav />
+        <h1>Not found</h1>
+    </div>
   )
 }
