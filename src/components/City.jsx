@@ -21,7 +21,8 @@ function City() {
 
   return (
     <div className={styles.city}>
-      <div className={styles.row}>
+      <h1>city</h1>
+      {/* <div className={styles.row}>
         <h6>City name</h6>
         <h3>
           <span>{emoji}</span> {cityName}
@@ -49,11 +50,7 @@ function City() {
         >
           Check out {cityName} on Wikipedia &rarr;
         </a>
-      </div>
-
-      <div>
-        <ButtonBack />
-      </div>
+      </div> */}
     </div>
   );
 }
