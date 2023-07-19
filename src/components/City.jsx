@@ -3,6 +3,7 @@ import styles from "./City.module.css";
 import { useCities } from "../context/CitiesContext";
 import { useEffect } from "react";
 import Spinner from "./Spinner";
+import BackButton from "./BackButton";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -22,8 +23,8 @@ function City() {
 
   const { cityName, emoji, date, notes } = currentCity;
 
-  if(isLoading) return <Spinner />
-  
+  if (isLoading) return <Spinner />;
+
   return (
     <div className={styles.city}>
       <h1>city</h1>
@@ -55,6 +56,10 @@ function City() {
         >
           Check out {cityName} on Wikipedia &rarr;
         </a>
+      </div>
+
+      <div>
+        <BackButton />
       </div>
     </div>
   );
