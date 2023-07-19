@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
 import styles from "./City.module.css";
+import { useCities } from "../context/CitiesContext";
+import { useEffect } from "react";
+import Spinner from "./Spinner";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -11,13 +14,20 @@ const formatDate = (date) =>
 
 function City() {
   const { id } = useParams();
+  const { getCity, currentCity, isLoading } = useCities();
+
+  useEffect(() => {
+    getCity(id);
+  }, [id]);
 
   const { cityName, emoji, date, notes } = currentCity;
 
+  if(isLoading) return <Spinner />
+  
   return (
     <div className={styles.city}>
       <h1>city</h1>
-      {/* <div className={styles.row}>
+      <div className={styles.row}>
         <h6>City name</h6>
         <h3>
           <span>{emoji}</span> {cityName}
@@ -45,7 +55,7 @@ function City() {
         >
           Check out {cityName} on Wikipedia &rarr;
         </a>
-      </div> */}
+      </div>
     </div>
   );
 }

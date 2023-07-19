@@ -8,6 +8,7 @@ const CitiesContext = createContext();
 export const CitiesProvider = ({ children }) => {
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentCity, setCurrentCity] = useState({});
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -26,14 +27,28 @@ export const CitiesProvider = ({ children }) => {
     fetchCities();
   }, []);
 
+  const getCity = async (id) => {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/cities/${id}`);
+      const data = await res.json();
+      setCurrentCity(data);
+    } catch (err) {
+      console.log("Error fetching city.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <CitiesContext.Provider value={{ cities, isLoading }}>
+    <CitiesContext.Provider value={{ cities, isLoading, getCity, currentCity }}>
       {children}
     </CitiesContext.Provider>
   );
 };
 
 // context hook
+// eslint-disable-next-line react-refresh/only-export-components
 export const useCities = () => {
   const context = useContext(CitiesContext);
   if (context === undefined)
