@@ -120,7 +120,7 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        <Button type="primary" onClick={() => console.log("add")}>
+        <Button type="primary" onClick={handleFormSubmit}>
           ADD
         </Button>
         <BackButton />
