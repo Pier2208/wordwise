@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Map.module.css";
 import {
   MapContainer,
@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useCities } from "../context/CitiesContext";
 import { useGeolocation } from "../hooks/useGeolocation";
 import Button from "./Button";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 
 export default function Map() {
   const [mapPosition, setMapPosition] = useState([40, 0]);
@@ -20,9 +21,7 @@ export default function Map() {
     useGeolocation();
 
   // get lat/long in query string
-  const [searchParams] = useSearchParams();
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
+  const {lat, lng } = useUrlPosition()
 
   // update map when lat & long are in url
   useEffect(() => {
